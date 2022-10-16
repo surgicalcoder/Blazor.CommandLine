@@ -27,14 +27,18 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Costura.Fody" Version="5.8.0-alpha0098">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.2" />
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="System.CommandLine">
+      <Reference Include="System.CommandLine" PrivateAssets="all">
         <HintPath>..\deps\System.CommandLine.dll</HintPath>
       </Reference>
-      <Reference Include="System.CommandLine.NamingConventionBinder">
+      <Reference Include="System.CommandLine.NamingConventionBinder" PrivateAssets="all">
         <HintPath>..\deps\System.CommandLine.NamingConventionBinder.dll</HintPath>
       </Reference>
     </ItemGroup>

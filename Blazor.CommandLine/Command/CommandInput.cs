@@ -1,4 +1,4 @@
-using System.CommandLine.Builder;
+using System.CommandLine;
 using System.CommandLine.Parsing;
 using Blazor.CommandLine.Console;
 using Microsoft.Extensions.Logging;
@@ -8,7 +8,6 @@ namespace Blazor.CommandLine.Command
     internal class CommandInput
     {
         public string Text { get; set; }
-        public DateTime Time { get; } = DateTime.Now;
         readonly IRunningCommand _runningCommand;
         readonly ILogger<CommandInput> _logger;
         readonly IServiceProvider _provider;
@@ -52,7 +51,7 @@ namespace Blazor.CommandLine.Command
 
         public override string ToString()
         {
-            return $"<span class='header'>{Time.ToString("HH:mm")} > </span><span class='command'>{Text}{Environment.NewLine}</span>";
+            return $"<span class='header'>{DateTime.Now.ToString("HH:mm")} > </span><span class='command'>{Text}{Environment.NewLine}</span>";
         }
     }
 }

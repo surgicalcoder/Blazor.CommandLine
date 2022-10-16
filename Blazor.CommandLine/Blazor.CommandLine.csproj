@@ -13,8 +13,15 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.2" />
-        <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
-        <PackageReference Include="System.CommandLine.NamingConventionBinder" Version="2.0.0-beta4.22272.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="System.CommandLine">
+        <HintPath>..\deps\System.CommandLine.dll</HintPath>
+      </Reference>
+      <Reference Include="System.CommandLine.NamingConventionBinder">
+        <HintPath>..\deps\System.CommandLine.NamingConventionBinder.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

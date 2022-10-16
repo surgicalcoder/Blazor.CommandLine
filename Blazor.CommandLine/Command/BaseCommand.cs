@@ -62,7 +62,7 @@ namespace Blazor.CommandLine.Command
             return false;
         }
 
-        public void AddOption(string name, string description)
+        public void AddOption(string name, string description, bool isRequired = false)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -76,7 +76,23 @@ namespace Blazor.CommandLine.Command
             _command.AddOption(new Option<string>(aliases)
             {
                 Description = description,
-                Name = name
+                Name = name, 
+                IsRequired = isRequired
+            });
+
+            Handle();
+        }
+
+        public void AddOption(string[] name, string description)
+        {
+            if (name.Length == 0)
+            {
+                throw new System.ArgumentNullException(nameof(name));
+            }
+            
+            _command.AddOption(new Option<string>(name)
+            {
+                Description = description
             });
 
             Handle();

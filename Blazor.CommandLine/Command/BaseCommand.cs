@@ -2,6 +2,7 @@ using Blazor.CommandLine.Console;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.CommandLine.IO;
+using System.CommandLine.NamingConventionBinder;
 
 namespace Blazor.CommandLine.Command
 {
@@ -69,12 +70,11 @@ namespace Blazor.CommandLine.Command
                 optionCount = optionCount == 0 ? 1 : optionCount + 1;
                 var optionName = $"-o{optionCount.ToString()}";
                 string[] aliases = new string[] { name, optionName };
-
-                _command.AddOption(new Option(aliases)
+                
+                _command.AddOption(new Option<string>(aliases)
                 {
                     Description = description,
-                    Name = name,
-                    Argument = new Argument<string>(optionName)
+                    Name = name
                 });
 
                 Handle();

@@ -28,7 +28,7 @@ namespace Blazor.CommandLine.Command
         {
             if (_cmdBuilder != null)
             {
-                _cmdBuilder.AddCommand(command);
+                _cmdBuilder.Command.Add(command);
             }
 
             return this;

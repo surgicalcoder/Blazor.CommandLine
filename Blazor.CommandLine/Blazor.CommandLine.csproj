@@ -4,6 +4,21 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+
+      <PackageId>GoLive.Blazor.Console</PackageId>
+      <Authors>SurgicalCoder</Authors>
+      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+      <Description>A Console UI for Blazor WASM</Description>
+      <Copyright>Copyright 2022 - SurgicalCoder</Copyright>
+      <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+      <PackageLicenseExpression>MIT</PackageLicenseExpression>
+      <PublishRepositoryUrl>true</PublishRepositoryUrl>
+      <GenerateRepositoryUrlAttribute>true</GenerateRepositoryUrlAttribute>
+      <PackOnBuild>true</PackOnBuild>
+      <PackageProjectUrl>https://github.com/surgicalcoder/Blazor.CommandLine</PackageProjectUrl>
+      <RepositoryUrl>https://github.com/surgicalcoder/Blazor.CommandLine</RepositoryUrl>
+      <RepositoryType>git</RepositoryType>
+
     </PropertyGroup>
 
 

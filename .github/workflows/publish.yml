@@ -1,0 +1,20 @@
+name: Publish Saturn.Data to Nuget
+on: workflow_dispatch
+jobs: 
+  publish:
+      name: build, pack & publish
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Setup dotnet
+          uses: actions/setup-dotnet@v1
+          with:
+            dotnet-version: 5.x
+        - name: Publish
+          id: publish_nuget
+          uses: rohith/publish-nuget@v2
+          with:
+            PROJECT_FILE_PATH: Blazor.CommandLine/Blazor.CommandLine.csproj
+            VERSION_FILE_PATH: Directory.Build.props
+            VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
+            NUGET_KEY: ${{secrets.NUGET_KEY}}

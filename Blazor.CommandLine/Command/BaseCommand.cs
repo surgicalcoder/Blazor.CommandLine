@@ -80,26 +80,6 @@ namespace Blazor.CommandLine.Command
             });
 
             Handle();
-            /*int optionCount = _command.Options.Count();
-            if (optionCount < 4)
-            {
-                optionCount = optionCount == 0 ? 1 : optionCount + 1;
-                var optionName = $"-o{optionCount.ToString()}";
-                string[] aliases = new string[] { name, optionName };
-                
-                _command.AddOption(new Option<string>(aliases)
-                {
-                    Description = description,
-                    Name = name
-                });
-
-                Handle();
-            }
-            else
-            {
-                return;
-            }*/
-
         }
 
         public void UseArguments(string description)

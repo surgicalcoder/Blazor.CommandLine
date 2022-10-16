@@ -11,7 +11,7 @@ namespace Blazor.CommandLine
         protected string Running = string.Empty;
         protected Input Command = new Input();
         protected string Disabled { get; set; } = null;
-        protected string Placeholder { get; set; } = "Enter a command, type 'help' for avaliable commands.";
+        protected string Placeholder { get; set; } = "Enter a command, type 'help' for available commands.";
         [Parameter] public string Name { get; set; }
         [Parameter] public string Description { get; set; }
         [Parameter] public bool ShowDate { get; set; } = true;
@@ -66,10 +66,7 @@ namespace Blazor.CommandLine
             }
 
 
-            InvokeAsync(() =>
-            {
-                StateHasChanged();
-            });
+            InvokeAsync(StateHasChanged);
         });
 
         public string Version() => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();

@@ -1,4 +1,4 @@
-name: Publish Saturn.Data to Nuget
+name: Publish to Nuget
 on: workflow_dispatch
 jobs: 
   publish:

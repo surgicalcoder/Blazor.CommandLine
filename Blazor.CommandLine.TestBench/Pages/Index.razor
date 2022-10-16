@@ -1,0 +1,59 @@
+﻿@page "/"
+@using Blazor.CommandLine
+@using Blazor.CommandLine
+@using Blazor.CommandLine.Command
+@using Blazor.CommandLine.Console
+
+<h1>Hello, world!</h1>
+
+<BlazorCommandLine @ref="console" Name="Some Demo App v1.0.0"/>
+
+@code
+{
+	BlazorCommandLine console;
+
+	protected override Task OnAfterRenderAsync(bool firstRender)
+	{
+		console.Commands.Add(new CommandExample("simple","Description of command"));
+		console.Commands.Add(new LongCommand("lng","Description of long-running command"));
+
+		return base.OnAfterRenderAsync(firstRender);
+	}
+
+	public class CommandExample : BaseCommand
+	{
+		public CommandExample(string name,string description):base(name,description)
+		{
+			base.AddOption("-t","Description of option -t");
+			base.AddOption("-ar","Description of option -ar");
+		}
+
+		public override bool Execute(DefaultStreamWriter console,string option1,string option2,string option3,string option4,List<string> arguments)
+		{
+			console.Write("This is output of a simple command");
+			return true;
+		}
+	}
+
+	public class LongCommand : BaseCommand
+	{
+		public LongCommand(string name, string description):base(name,description,true)
+		{
+            
+		}
+
+		public override async Task<bool> ExecuteAsync(DefaultStreamWriter console, string option1,string option2,string option3,string optionArgument4,List<string> arguments)
+		{
+			var i = 0;
+
+			while (i < 10)
+			{
+				await Task.Delay(550);
+				i++;
+			}
+            
+			console.Write("This was a long running command");
+			return true;
+		}
+	}
+}

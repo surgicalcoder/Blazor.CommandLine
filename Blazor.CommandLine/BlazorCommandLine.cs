@@ -11,7 +11,7 @@ namespace Blazor.CommandLine
         protected string Running = string.Empty;
         protected Input Command = new Input();
         protected string Disabled { get; set; } = null;
-        protected string Placeholder { get; set; } = "Enter a command, type 'help' for available commands.";
+        protected string Placeholder { get; set; } = "Enter a command, type '-?' for available commands.";
         [Parameter] public string Name { get; set; }
         [Parameter] public string Description { get; set; }
         [Parameter] public bool ShowDate { get; set; } = true;
@@ -79,7 +79,7 @@ namespace Blazor.CommandLine
                 cmd.Text = input.Text;
                 input.Text = string.Empty;
 
-                if (cmd.Text.ToLower() == "clear" || cmd.Text.ToLower() == "clr")
+                if (cmd.Text.ToLower() == "clear" || cmd.Text.ToLower() == "clr" || cmd.Text.ToLower() == "cls")
                 {
                     Output = string.Empty;
                 }
@@ -92,7 +92,7 @@ namespace Blazor.CommandLine
                     Output += $"{await cmd.Result()}";
                     Output += $"</p>";
                     Disabled = null;
-                    Placeholder = "Enter a command, type 'help' for avaliable commands.";
+                    Placeholder = "Enter a command, type '-?' for available commands.";
                 }
             }
         }

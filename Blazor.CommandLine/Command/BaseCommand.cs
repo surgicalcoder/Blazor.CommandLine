@@ -14,7 +14,10 @@ namespace Blazor.CommandLine.Command
         
         public BaseCommand(string name, string description, bool longRunning = false)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new System.ArgumentException($"Command name can not have white space.", nameof(name));
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new System.ArgumentException($"Command name can not have white space.", nameof(name));
+            }
 
             _command = new System.CommandLine.Command(name, description);
 
@@ -41,7 +44,6 @@ namespace Blazor.CommandLine.Command
                 else
                 {
                     Execute(console.Out as DefaultStreamWriter, o1, o2, o3, o4, args);
-
                 }
             });
         }
@@ -62,9 +64,23 @@ namespace Blazor.CommandLine.Command
 
         public void AddOption(string name, string description)
         {
-            if (string.IsNullOrEmpty(name)) throw new System.ArgumentNullException(nameof(name));
-
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new System.ArgumentNullException(nameof(name));
+            }
             int optionCount = _command.Options.Count();
+            optionCount = optionCount == 0 ? 1 : optionCount + 1;
+            var optionName = $"-o{optionCount.ToString()}";
+            string[] aliases = new string[] { name, optionName };
+                
+            _command.AddOption(new Option<string>(aliases)
+            {
+                Description = description,
+                Name = name
+            });
+
+            Handle();
+            /*int optionCount = _command.Options.Count();
             if (optionCount < 4)
             {
                 optionCount = optionCount == 0 ? 1 : optionCount + 1;
@@ -82,7 +98,7 @@ namespace Blazor.CommandLine.Command
             else
             {
                 return;
-            }
+            }*/
 
         }
 
@@ -90,12 +106,11 @@ namespace Blazor.CommandLine.Command
         {
             if (string.IsNullOrEmpty(description)) throw new System.ArgumentNullException(nameof(description));
 
-            _command.AddArgument(new Argument<List<string>>
-            {
-                Name = "args",
-                Description = description,
-                Arity = ArgumentArity.ZeroOrMore
-            });
+            var argument = new Argument<List<string>>();
+            argument.Name = "args";
+            argument.Description = description;
+            argument.Arity = ArgumentArity.ZeroOrMore;
+            _command.AddArgument(argument);
 
             Handle();
         }

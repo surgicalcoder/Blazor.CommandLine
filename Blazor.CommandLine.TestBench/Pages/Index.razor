@@ -16,8 +16,61 @@
 	{
 		console.Commands.Add(new CommandExample("simple","Description of command"));
 		console.Commands.Add(new LongCommand("lng","Description of long-running command"));
+		console.Commands.Add(new HelloWorldExample("hello", "Says hello world"));
+		console.Commands.Add(new HelloWorldExample2("hello2", "Says hello world using Arguments not option"));
 
 		return base.OnAfterRenderAsync(firstRender);
+	}
+
+	public class HelloWorldExample2 : BaseCommand
+	{
+		public HelloWorldExample2(string name, string description, bool longRunning = false) : base(name, description, false)
+		{
+			base.UseArguments("Provide name to say hi to");
+		}
+
+		public override bool Execute(DefaultStreamWriter console, string option1, string option2, string option3, string option4, List<string> arguments)
+		{
+			console.WriteLine($"Arguments : {string.Join(",", arguments)}");
+			console.WriteLine("");
+			if (!arguments.Any())
+			{
+				console.Write("ERROR: Name not provided");
+				return false;
+			}
+			console.Write($"Hello, {string.Join(" ", arguments)}!" );
+			return true;
+		}
+	}
+	
+	public class HelloWorldExample : BaseCommand
+	{
+		public HelloWorldExample(string name, string description, bool longRunning = false) : base(name, description, longRunning)
+		{
+			base.AddOption("-n", "Name to say hello to");
+			base.AddOption("-n2", "Name to say hello to");
+			base.AddOption("-n3", "Name to say hello to");
+			base.AddOption("-n4", "Name to say hello to");
+			base.AddOption("-n5", "Name to say hello to");
+		}
+
+		public override bool Execute(DefaultStreamWriter console, string option1, string option2, string option3, string option4, List<string> arguments)
+		{
+			console.WriteLine($"Option 1 : {option1}");
+			console.WriteLine($"Option 2 : {option2}");
+			console.WriteLine($"Option 3 : {option3}");
+			console.WriteLine($"Option 4 : {option4}");
+			console.WriteLine($"Arguments : {string.Join(",", arguments)}");
+			console.WriteLine("");
+			if (string.IsNullOrWhiteSpace(option1))
+			{
+				console.Write("ERROR: Name not provided");
+				return false;
+			}
+			
+			console.Write($"Hello, {option1}!" );
+			return true;
+		}
 	}
 
 	public class CommandExample : BaseCommand

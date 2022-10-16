@@ -13,6 +13,11 @@ namespace Blazor.CommandLine.Console
         public void Write(string value)
         {
             output.Append(value);
+        }        
+        
+        public void WriteLine(string value)
+        {
+            output.AppendLine(value);
         }
 
         public override string ToString()
